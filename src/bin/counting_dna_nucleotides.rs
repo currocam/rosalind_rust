@@ -11,26 +11,37 @@ fn main() {
         .read_line(&mut sequence)
         .expect("Failed to read line");
     let result = count_nucleotides_dna(&sequence.trim());
-    println!("{} {} {} {}", result.0, result.1, result.2, result.3)
+    println!(
+        "{} {} {} {}",
+        result.adenine, result.cytosine, result.guanine, result.thymine
+    )
 }
 const ADENINE: u8 = 65;
 const CYTOSINE: u8 = 67;
 const GUANINE: u8 = 71;
 const THYMINE: u8 = 84;
-pub fn count_nucleotides_dna(dna_string:&str)-> (u32, u32, u32, u32){
-    // Counting nucleotides
-    let mut counting_tuple:(u32, u32, u32, u32) = (0, 0, 0, 0);
+
+pub struct CountingNucleotides {
+    pub adenine: u32,
+    pub cytosine: u32,
+    pub guanine: u32,
+    pub thymine: u32
+}
+pub fn count_nucleotides_dna(dna_string:&str)-> CountingNucleotides {
+    let mut counting_nucleotides = CountingNucleotides {
+        adenine: 0, cytosine: 0, guanine: 0, thymine: 0
+    };
     let nucleotides =  dna_string.to_uppercase();
     for nucleotide in nucleotides.as_bytes().into_iter(){
         match *nucleotide {
-            ADENINE => counting_tuple.0 +=1,
-            CYTOSINE => counting_tuple.1 +=1,
-            GUANINE => counting_tuple.2 +=1,
-            THYMINE => counting_tuple.3 +=1,
+            ADENINE => counting_nucleotides.adenine +=1,
+            CYTOSINE => counting_nucleotides.cytosine+=1,
+            GUANINE => counting_nucleotides.guanine +=1,
+            THYMINE => counting_nucleotides.thymine +=1,
             _ => panic!("An invalid value was found.")}
 
     }
-    counting_tuple
+    return counting_nucleotides;
 }
 #[cfg(test)]
 mod tests {
@@ -38,7 +49,10 @@ mod tests {
     #[test]
     fn it_works_with_sample_dataset() {
         let dna_string = String::from("AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC");
-        let result:(u32, u32, u32, u32) = (20, 12, 17, 21);
-        assert_eq!(count_nucleotides_dna(&dna_string), result);
+        let result = count_nucleotides_dna(&dna_string);
+        assert_eq!(20, result.adenine);
+        assert_eq!(12, result.cytosine);
+        assert_eq!(17, result.guanine);
+        assert_eq!(21, result.thymine);
     }
 }
