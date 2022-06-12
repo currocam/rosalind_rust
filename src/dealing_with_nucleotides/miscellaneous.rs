@@ -32,7 +32,6 @@ pub fn count_nucleotides_dna(dna_string: &str) -> CountingNucleotides {
 #[cfg(test)]
 mod tests {
     use super::*;
-
     #[test]
     fn it_works_with_sample_dataset() {
         let dna_string = String::from("AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC");

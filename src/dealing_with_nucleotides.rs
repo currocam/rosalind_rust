@@ -1,6 +1,4 @@
 pub mod miscellaneous;
-#[cfg(test)]
-mod tests;
 pub fn get_complementing_dna_strand(dna_string:&str) -> String {
     let mut complementing_strand = String::new();
     for nucleotide in dna_string.chars().rev().into_iter(){
@@ -25,4 +23,15 @@ pub fn transcribing_dna_into_rna(dna_string:&str) -> String {
             _ => panic!("An invalid value was found.")}
     }
     return rna_seq;
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn it_works_when_transcribing_dna_into_rna() {
+        let dna_string = String::from("GATGGAACTTGACTACGTAAATT");
+        let rna_string = String::from("GAUGGAACUUGACUACGUAAAUU");
+        let result = transcribing_dna_into_rna(&dna_string);
+        assert_eq!(result, rna_string);
+    }
 }
