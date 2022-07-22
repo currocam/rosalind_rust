@@ -24,6 +24,13 @@ pub fn transcribing_dna_into_rna(dna_string:&str) -> String {
     }
     return rna_seq;
 }
+pub fn compute_cg_content(dna_string:&str) -> f32{
+    let length =dna_string.chars().count() as f32;
+    let n_cytosines = dna_string.matches("C").count() as f32;
+    let n_guanines = dna_string.matches("G").count() as f32;
+   return  (n_cytosines +n_guanines) /length;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -33,5 +40,11 @@ mod tests {
         let rna_string = String::from("GAUGGAACUUGACUACGUAAAUU");
         let result = transcribing_dna_into_rna(&dna_string);
         assert_eq!(result, rna_string);
+    }
+    #[test]
+    fn given_dna_seq_it_computes_cg_content() {
+        let dna_string = String::from("CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGACTGGGAACCTGCGGGCAGTAGGTGGAAT");
+        let result = compute_cg_content(&dna_string);
+        assert_eq!(result*100.0, 60.919540);
     }
 }
