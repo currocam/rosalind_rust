@@ -1,6 +1,8 @@
-// A solution to Transcribing DNA into RNA problem from Rosalind
-// Given: A DNA string t having length at most 1000 nt.
-// Return: The transcribed RNA string of t
+/*
+A solution to Transcribing DNA into RNA problem from Rosalind
+Given: A DNA string t having length at most 1000 nt.
+Return: The transcribed RNA string of t
+*/
 use std::io;
 use rosalind_rust::dealing_with_nucleotides;
 fn main() {

@@ -1,6 +1,8 @@
-// Complementing a Strand of DNA
-// Given: A DNA string s of length at most 1000 bp.
-// Return: The reverse complement sc of s.
+/*
+Complementing a Strand of DNA
+Given: A DNA string s of length at most 1000 bp.
+Return: The reverse complement sc of s.
+*/
 use std::io;
 use rosalind_rust::dealing_with_nucleotides;
 fn main() {
