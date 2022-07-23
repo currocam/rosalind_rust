@@ -1,5 +1,6 @@
 pub mod miscellaneous;
 pub mod alignment;
+pub mod proteins;
 pub fn get_complementing_dna_strand(dna_string:&str) -> String {
     let mut complementing_strand = String::new();
     for nucleotide in dna_string.chars().rev().into_iter(){
