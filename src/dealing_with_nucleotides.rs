@@ -33,6 +33,19 @@ pub fn compute_cg_content(dna_string:&str) -> f32{
    return  (n_cytosines +n_guanines) /length;
 }
 
+pub fn find_a_motif_in_dna(dna_string:&str, motif:&str) -> Vec<usize>{
+    let sub_sequences =  dna_string
+        .as_bytes()
+        .windows(motif.chars().count());
+    let mut positions = Vec::new();
+    for (i, seq) in sub_sequences.into_iter().enumerate(){
+        if seq == motif.as_bytes() {
+            positions.push(i);    
+        }
+    }
+   return  positions;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -48,5 +61,12 @@ mod tests {
         let dna_string = String::from("CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGACTGGGAACCTGCGGGCAGTAGGTGGAAT");
         let result = compute_cg_content(&dna_string);
         assert_eq!(result*100.0, 60.919540);
+    }
+    #[test]
+    fn given_dna_seq_and_motif_returns_positions() {
+        let dna_string = String::from("GATATATGCATATACTT");
+        let motif = String::from("ATAT");
+        let result = find_a_motif_in_dna(&dna_string, &motif);
+        assert_eq!(result, vec![1, 3, 9]);
     }
 }
