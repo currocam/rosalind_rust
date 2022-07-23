@@ -12,3 +12,10 @@ pub fn read_number() -> u64 {
     let number: u64 = number.trim().parse().expect("Please type a number!");
     return number;
 }
+pub fn read_string() -> String {
+    let mut string = String::new();
+    io::stdin()
+        .read_line(&mut string)
+        .expect("Failed to read line");
+    return string;
+}
